@@ -1,0 +1,8 @@
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.filters th {
+  background: var(--color-surface);
+  font-weight: 400;
+}

@@ -1,0 +1,64 @@
+<app-panel heading="List movies">
+  @if (loading()) {
+    <p class="state" role="status">Loading...</p>
+  }
+
+  @if (error()) {
+    <p class="state state--error" role="alert">Could not load the data. Please try again later.</p>
+  }
+
+  <div class="table-wrapper">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Year</th>
+          <th>Title</th>
+          <th>Winner?</th>
+        </tr>
+        <tr class="filters">
+          <th></th>
+          <th>
+            <input
+              class="field"
+              type="text"
+              inputmode="numeric"
+              maxlength="4"
+              placeholder="Filter by year"
+              aria-label="Filter by year"
+              [formControl]="yearControl"
+            />
+          </th>
+          <th></th>
+          <th>
+            <select class="field" aria-label="Filter by winner" [formControl]="winnerControl">
+              <option value="">All</option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (movie of result()?.content ?? []; track movie.id) {
+          <tr>
+            <td>{{ movie.id }}</td>
+            <td>{{ movie.year }}</td>
+            <td>{{ movie.title }}</td>
+            <td>{{ movie.winner ? 'Yes' : 'No' }}</td>
+          </tr>
+        } @empty {
+          @if (!loading()) {
+            <tr>
+              <td class="empty" colspan="4">No movies found.</td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+
+  @if (result(); as page) {
+    <app-pagination [page]="page.number" [totalPages]="page.totalPages" (pageChange)="onPageChange($event)" />
+  }
+</app-panel>

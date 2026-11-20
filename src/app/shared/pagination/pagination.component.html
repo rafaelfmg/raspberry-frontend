@@ -1,0 +1,21 @@
+@if (totalPages() > 1) {
+  <nav class="pagination" aria-label="Pagination">
+    <button type="button" aria-label="First page" [disabled]="isFirst()" (click)="goTo(0)">&laquo;</button>
+    <button type="button" aria-label="Previous page" [disabled]="isFirst()" (click)="goTo(page() - 1)">&lsaquo;</button>
+
+    @for (target of visiblePages(); track target) {
+      <button
+        type="button"
+        class="pagination__page"
+        [class.active]="target === page()"
+        [attr.aria-current]="target === page() ? 'page' : null"
+        (click)="goTo(target)"
+      >
+        {{ target + 1 }}
+      </button>
+    }
+
+    <button type="button" aria-label="Next page" [disabled]="isLast()" (click)="goTo(page() + 1)">&rsaquo;</button>
+    <button type="button" aria-label="Last page" [disabled]="isLast()" (click)="goTo(totalPages() - 1)">&raquo;</button>
+  </nav>
+}
