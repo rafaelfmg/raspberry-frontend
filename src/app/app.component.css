@@ -1,0 +1,50 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.topbar {
+  padding: 14px 20px;
+  background: var(--color-dark);
+  color: #fff;
+}
+
+.topbar h1 {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.layout {
+  display: flex;
+  flex: 1;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 150px;
+  gap: 4px;
+  padding: 16px 12px;
+  border-right: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.sidebar a {
+  padding: 6px 8px;
+  border-radius: var(--radius);
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  background: #e7f1ff;
+  font-weight: 600;
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+  padding: 20px;
+}
